@@ -1,5 +1,5 @@
 
-import { fectchUser, fectchUsers, getActivity } from "@/lib/actions/user.actions";
+import { fetchUser, fetchUsers, getActivity } from "@/lib/actions/user.actions";
 import { currentUser } from "@clerk/nextjs";
 import Image from "next/image";
 import Link from "next/link";
@@ -9,7 +9,7 @@ async function Page()  {
     const user = await currentUser();
     if(!user) return null;
 
-    const userInfo = await fectchUser(user.id);
+    const userInfo = await fetchUser(user.id);
     if(!userInfo?.onboarded) redirect('/onboarding');
 
     //Get Activity

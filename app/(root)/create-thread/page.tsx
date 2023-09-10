@@ -1,5 +1,5 @@
 import PostThread from "@/components/forms/PostThread";
-import { fectchUser } from "@/lib/actions/user.actions";
+import { fetchUser } from "@/lib/actions/user.actions";
 import { currentUser } from "@clerk/nextjs";
 import { redirect } from "next/navigation";
 
@@ -8,7 +8,7 @@ async function Page() {
 
     if(!user) return null;
 
-    const userInfo = await fectchUser(user.id);
+    const userInfo = await fetchUser(user.id);
 
     if(!userInfo?.onboarded) redirect('/onboarding');
 

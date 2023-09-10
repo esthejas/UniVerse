@@ -1,5 +1,5 @@
 
-import { fectchUser, fectchUsers } from "@/lib/actions/user.actions";
+import { fetchUser, fetchUsers } from "@/lib/actions/user.actions";
 import { currentUser } from "@clerk/nextjs";
 import { redirect } from "next/navigation";
 import UserCard from "@/components/cards/UserCard";
@@ -8,11 +8,11 @@ async function Page()  {
     const user = await currentUser();
     if(!user) return null;
 
-    const userInfo = await fectchUser(user.id);
+    const userInfo = await fetchUser(user.id);
     if(!userInfo?.onboarded) redirect('/onboarding');
 
     //Fetch users
-    const result = await fectchUsers({
+    const result = await fetchUsers({
         userId: user.id,
         searchString:'',
         pageNumber:1,
